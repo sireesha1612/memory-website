@@ -1,0 +1,539 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background: #fff9f4;
+    color: #806a83;
+}
+
+.screen {
+    display: none;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.screen.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* FALLING FLOWERS / PANDAS */
+
+#fallLayer {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.fall-item {
+    position: absolute;
+    top: -60px;
+    will-change: transform, opacity;
+    user-select: none;
+}
+
+/* OPENING PAGE */
+
+#homeScreen {
+    background:
+        radial-gradient(circle at 15% 20%, #fff0f3 0, transparent 25%),
+        radial-gradient(circle at 85% 80%, #f1e9ff 0, transparent 30%),
+        #fffaf3;
+    padding: 50px 20px;
+}
+
+#homeScreen::before {
+    content: "";
+    position: absolute;
+    inset: 20px;
+    border: 2px solid #edc6dc;
+    border-radius: 45px 30px 50px 35px;
+    pointer-events: none;
+}
+
+#homeScreen::after {
+    content: "♡";
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    color: #e8a7c7;
+    font-size: 30px;
+}
+
+/* Ribbon: small, top-left. multiply hides the white picture background */
+.corner-ribbon {
+    position: absolute;
+    top: 35px;
+    left: 45px;
+    width: 80px;
+    transform: rotate(-15deg);
+    z-index: 2;
+}
+
+.corner-ribbon img {
+    display: block;
+    width: 100%;
+    height: auto;
+    mix-blend-mode: multiply;
+}
+
+.bottom-bow {
+    position: absolute;
+    bottom: 25px;
+    right: 40px;
+    font-size: 48px;
+}
+
+.greeting-content {
+    text-align: center;
+    width: min(620px, 90%);
+    z-index: 2;
+    padding: 25px;
+    margin: 0 auto;
+}
+
+.small-heading {
+    color: #c58cb5;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+}
+
+.greeting-content h1,
+.final-card h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(38px, 6vw, 65px);
+    line-height: 1.35;
+    color: #a47bb7;
+    font-weight: 400;
+    text-transform: none;
+}
+
+/* Name: Capital first letter (bigger), rest small */
+.greeting-content h1 .name {
+    display: block;
+    color: #e88eaa;
+}
+
+.cap {
+    display: inline;
+    font-size: 1.3em;
+    line-height: 1;
+}
+
+.greeting-message {
+    font-size: 17px;
+    line-height: 1.8;
+    margin: 18px auto;
+    max-width: 450px;
+    color: #987da1;
+}
+
+.passcode-message {
+    margin-top: 25px;
+    margin-bottom: 17px;
+    font-weight: 700;
+}
+
+/* ROUNDED PASSCODE BOX */
+
+.password-wrapper {
+    display: flex;
+    align-items: center;
+    max-width: 420px;
+    width: 100%;
+    margin: auto;
+    background: #fff8ff;
+    border: 2px dashed #d6a5d3;
+    outline: 5px solid #f9e8f3;
+    border-radius: 50px;
+    padding: 15px 22px;
+}
+
+.password-wrapper input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+    color: #85678e;
+    padding: 5px 12px;
+}
+
+.password-wrapper input::placeholder {
+    color: #b49ab7;
+}
+
+.lock-icon {
+    font-size: 22px;
+    color: #b17bb9;
+}
+
+#errorMessage {
+    color: #df7899;
+    min-height: 22px;
+    margin-top: 15px;
+    font-weight: 700;
+}
+
+/* BUTTONS */
+
+.unlock-button,
+.main-button {
+    border: none;
+    border-radius: 40px;
+    background: #bd91c9;
+    color: white;
+    padding: 14px 36px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 18px;
+    box-shadow: 0 5px 0 #a879b7;
+    transition: 0.25s;
+}
+
+.unlock-button:hover,
+.main-button:hover {
+    transform: translateY(-3px);
+    background: #d18eae;
+    box-shadow: 0 7px 0 #b879a1;
+}
+
+.tiny-note {
+    margin-top: 30px;
+    font-size: 12px;
+    color: #c29ab9;
+    letter-spacing: 1px;
+}
+
+/* PANDA DECORATIONS (photo; emoji is the fallback) */
+
+.panda {
+    position: absolute;
+    font-size: 80px;
+    z-index: 1;
+}
+
+.panda img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.panda-left {
+    left: 12px;
+    top: 42%;
+    width: 95px;
+    transform: rotate(-12deg);
+}
+
+.panda-bottom {
+    right: 20px;
+    bottom: 30px;
+    width: 80px;
+    transform: rotate(8deg);
+}
+
+/* FLOWER PICTURES */
+
+.flower-decoration {
+    position: absolute;
+    width: 90px;
+    z-index: 1;
+}
+
+.flower-decoration img {
+    display: block;
+    width: 100%;
+    height: auto;
+    mix-blend-mode: multiply;
+}
+
+.flower-left {
+    bottom: 55px;
+    left: 60px;
+}
+
+.flower-right {
+    top: 60px;
+    right: 65px;
+}
+
+/* QR CODE */
+
+.qr-card {
+    position: absolute;
+    right: 35px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 155px;
+    background: #fffafa;
+    padding: 14px;
+    border: 2px dashed #efbfd5;
+    border-radius: 20px;
+    text-align: center;
+    z-index: 3;
+}
+
+.qr-card p {
+    font-size: 11px;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.qr-card small {
+    display: block;
+    font-size: 10px;
+    margin-top: 9px;
+    line-height: 1.5;
+}
+
+#qrcode {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#qrcode img,
+#qrcode canvas {
+    max-width: 115px;
+    height: auto;
+}
+
+/* OTHER SCREENS */
+
+#cakeScreen,
+#letterScreen,
+#memoryScreen,
+#finalScreen {
+    padding: 30px 15px;
+    background: linear-gradient(135deg, #fff6f5, #f7efff, #fffaf0);
+}
+
+.content-card {
+    background: #fffdfb;
+    border: 2px solid #f0d6e7;
+    border-radius: 30px;
+    box-shadow: 0 12px 35px #b99ab322;
+    padding: 35px 25px;
+    text-align: center;
+    width: min(650px, 95%);
+}
+
+h2 {
+    font-family: 'Pacifico', cursive;
+    font-weight: 400;
+    color: #a27bb3;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.cake-photo img {
+    width: min(320px, 100%);
+    max-height: 270px;
+    object-fit: contain;
+    border-radius: 20px;
+}
+
+.cake-message {
+    margin: 20px auto;
+    line-height: 1.8;
+}
+
+.candles {
+    font-size: 30px;
+    margin: 15px;
+}
+
+.flame.out {
+    opacity: 0.25;
+}
+
+.letter-paper {
+    background: #fffaf0;
+    width: min(680px, 95%);
+    padding: 45px 40px;
+    border: 2px solid #ead5c1;
+    border-radius: 8px 25px 8px 25px;
+    box-shadow: 8px 10px 0 #eadde9;
+    position: relative;
+    line-height: 2;
+    color: #806d75;
+}
+
+.letter-bow {
+    text-align: center;
+    font-size: 45px;
+}
+
+.letter-top {
+    text-align: center;
+    letter-spacing: 3px;
+    font-size: 11px;
+    color: #c18eaf;
+    font-weight: 800;
+}
+
+.letter-paper h2 {
+    margin: 20px 0;
+}
+
+.letter-paper p {
+    margin-bottom: 15px;
+}
+
+.letter-sign {
+    font-family: 'Pacifico', cursive;
+    color: #b17fa8;
+    text-align: right;
+    font-size: 20px;
+    margin-top: 25px;
+}
+
+/* POLAROID MEMORY ALBUM */
+
+.memory-card {
+    background: #fffaf5;
+}
+
+.polaroid {
+    width: min(550px, 95%);
+    background: white;
+    margin: 30px auto;
+    padding: 15px 15px 50px;
+    transform: rotate(-1deg);
+    box-shadow: 0 8px 22px #8b718633;
+    border: 1px solid #eee5e7;
+}
+
+.polaroid img {
+    display: block;
+    width: 100%;
+    height: 550px;
+    object-fit: contain;
+    background: #f8f0f5;
+}
+
+.polaroid p {
+    font-family: 'Pacifico', cursive;
+    color: #ad83aa;
+    margin-top: 12px;
+}
+
+.memory-controls {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.memory-controls button {
+    border: 1px solid #dfc2d9;
+    background: #fff3f8;
+    color: #98739d;
+    border-radius: 30px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+}
+
+.final-card {
+    padding: 55px 25px;
+}
+
+.final-card p {
+    line-height: 1.9;
+    margin: 20px auto;
+    max-width: 450px;
+}
+
+.final-panda {
+    font-size: 85px;
+    margin-bottom: 15px;
+}
+
+.final-panda img {
+    width: 100px;
+    height: auto;
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+    .qr-card {
+        position: relative;
+        top: auto;
+        right: auto;
+        transform: none;
+        margin: 20px auto 0;
+    }
+
+    #homeScreen {
+        flex-direction: column;
+        padding: 60px 15px 30px;
+    }
+
+    .panda-left {
+        left: 8px;
+        top: 12px;
+        width: 55px;
+        font-size: 50px;
+    }
+
+    .panda-bottom {
+        right: 8px;
+        bottom: 10px;
+        width: 55px;
+        font-size: 50px;
+    }
+
+    .corner-ribbon {
+        top: 28px;
+        left: 70px;
+        width: 50px;
+    }
+
+    .flower-decoration {
+        width: 55px;
+    }
+
+    .flower-left {
+        left: 14px;
+        bottom: 15px;
+    }
+
+    .flower-right {
+        right: 15px;
+        top: 20px;
+    }
+
+    .greeting-content {
+        padding: 25px 10px;
+    }
+
+    .greeting-content h1 {
+        font-size: 39px;
+    }
+
+    .letter-paper {
+        padding: 30px 22px;
+    }
+
+    .polaroid img {
+        height: 250px;
+    }
+}

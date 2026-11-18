@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Anu ♡</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+    </script>
+</head>
+
+<body>
+
+    <!-- DECORATIONS -->
+    <div class="floating-decorations" aria-hidden="true">
+        <span>🧸</span><span>✦</span><span>🎈</span>
+        <span>🌟</span><span>🐼</span><span>❤️</span>
+        <span>🌟</span><span>🎈</span><span>🎈</span>
+    </div>
+
+    <!-- OPENING GREETING -->
+    <section id="homeScreen" class="screen active">
+
+        <div class="corner-ribbon">
+            <img src = "C:\vscode\.vscode\images\ribbon.jpg"></div>
+
+        <div class="flower-decoration flower-left">
+            <img src = "C:\vscode\.vscode\images\flower2.jpeg">
+        </div>
+        <div class="flower-decoration flower-right">
+            <img src= "C:\vscode\.vscode\images\images.jpg" ></div>
+        
+
+        <div class="panda panda-left">
+            <img src = "C:\vscode\.vscode\images\pandaaaaa.jpg">
+        </div>
+        </div>
+
+        <div class="greeting-content">
+
+            <p class="small-heading">A LITTLE BIRTHDAY SURPRISE FOR YOU</p>
+
+            <h1>
+                Happy Birthday,
+                <span>Anu!</span>
+            </h1>
+
+            <p class="greeting-message">
+                You're so special and you deserve all the happiness
+                in the world! ♡
+            </p>
+
+            <p class="passcode-message">
+                Enter the passcode to unlock your surprise
+            </p>
+
+            <div class="password-wrapper">
+                <span class="lock-icon">♡</span>
+                <input
+                    type="password"
+                    id="passcode"
+                    placeholder="Enter passcode..."
+                    maxlength="10"
+                >
+                <span>🔒</span>
+            </div>
+
+            <p id="errorMessage"></p>
+
+            <button class="unlock-button" onclick="unlockSurprise()">
+                Unlock ♡
+            </button>
+
+            <div class="tiny-note">
+                made with lots of love, just for you
+            </div>
+
+        </div>
+
+        <div class="panda panda-bottom">
+           <img src= "C:\vscode\.vscode\images\images (5).jpg">
+        </div>
+
+        <div class="qr-card">
+            <p>♡ A secret little surprise ♡</p>
+            <div id="qrcode"></div>
+            <small>Scan me to open the birthday surprise!</small>
+        </div>
+        <div class="bottom-bow">🎀</div>
+
+    </section>
+
+
+    <!-- CAKE SCREEN -->
+    <section id="cakeScreen" class="screen">
+
+        <div class="content-card cake-card">
+            <p class="small-heading">A CAKE JUST FOR YOU</p>
+
+            <h2> Make a wish, Anu! 🎂</h2>
+
+            <div class="cake-photo">
+                <img src="D:\anu\images.jpg" alt="Birthday cake">
+            </div>
+
+            <p class="cake-message">
+                Close your eyes, make a beautiful wish
+                and blow out your candles! ♡
+            </p>
+
+            <div class="candles">
+                <span class="flame">🕯️</span>
+                <span class="flame">🕯️</span>
+                <span class="flame">🕯️</span>
+            </div>
+
+            <button class="main-button" id="blowButton" onclick="blowCandles()">
+                Blow the candles ✨
+            </button>
+        </div>
+
+    </section>
+
+
+    <!-- LETTER SCREEN -->
+    <section id="letterScreen" class="screen">
+
+        <div class="letter-paper">
+
+            <div class="letter-bow">🎀</div>
+
+            <p class="letter-top">A LITTLE LETTER FOR YOU</p>
+
+            <h2>Dear Anu, ♡</h2>
+
+            <p>
+                Happy Birthday to one of the sweetest people!
+                Today is all about you, and I hope your day is
+                filled with smiles, laughter and beautiful memories.🎀🧸
+            </p>
+
+            <p>
+                Thank you for being a part of our life's.
+                I hope all your dreams come true and that you
+                always find reasons to smile.🎀🧸
+            </p>
+
+            <p>
+                May this new year bring you endless happiness,
+                exciting adventures and everything your heart wishes for.
+            </p>
+
+            <p>
+                Never forget how special you are.
+                Keep smiling and stay the lovely person you are!
+            </p>
+
+            <p class="letter-sign">
+                With lots of love,
+                <br>
+                From Trio 🎀🧸❤️
+            </p>
+
+            <button class="main-button" onclick="startMemories()">
+                your cute memories 📸
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- MEMORY SCREEN -->
+    <section id="memoryScreen" class="screen">
+
+        <div class="content-card memory-card">
+
+            <p class="small-heading">LITTLE MOMENTS, BIG MEMORIES</p>
+
+            <h2>Cute Memory Album ❤️</h2>
+
+            <div class="polaroid">
+                <img id="memoryImage" src="D:\anu\WhatsApp Image 2026-11-15 at 9.08.00 PM.jpeg" alt="Our memory">
+                <p id="photoCounter">Memory 1 of 4 ♡</p>
+            </div>
+
+            <div class="memory-controls">
+                <button onclick="previousPhoto()">← Previous</button>
+                <button onclick="toggleSlideshow()" id="pauseButton">Pause</button>
+                <button onclick="nextPhoto()">Next →</button>
+            </div>
+
+            <button class="main-button" onclick="finishSurprise()">
+                One last surprise 🧸
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- FINAL SCREEN -->
+    <section id="finalScreen" class="screen">
+
+        <div class="content-card final-card">
+
+            <div class="final-panda">🐼</div>
+
+            <p class="small-heading">A FINAL LITTLE WISH</p>
+
+            <h1>Happy Birthday, Anu! ♡</h1>
+
+            <p>
+                May your life always be as lovely,
+                colourful and beautiful as this little surprise.
+            </p>
+
+            <h2>Lots of love! 🎀</h2>
+
+            <button class="main-button" onclick="showScreen('homeScreen')">
+                Start again ♡
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <script src=script.js></script>
+
+</body>
+</html>

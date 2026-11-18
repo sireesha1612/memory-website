@@ -1,0 +1,212 @@
+const SECRET_CODE = "2611";
+
+// Add your photos here
+const photos = [
+    "images\\anu.jpeg",
+    "images\\photo 3.jpeg",
+    "images\\photo 13.jpeg",
+    "images\\photo 1.jpeg",
+    "images\\photo 5.jpeg",
+    "\images\\photo10.jpeg",
+    "images\\photo 6.jpeg",
+    "images\\photo4.jpeg",
+    "images\\photo 11.jpeg",
+    "images\\photo19.jpeg",
+    "images\\photo2.jpeg"
+];
+
+let currentPhoto = 0;
+let slideshowTimer = null;
+let candlesBlown = false;
+
+
+// CHANGE THIS AFTER HOSTING YOUR WEBSITE.
+// For now, the QR code uses the current website address.
+const birthdayWebsiteURL = "C:\Users\hp\Downloads\anu_qr_photo_website.zip";
+
+
+// SCREEN CHANGER
+function showScreen(screenId) {
+    document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+    });
+
+    document.getElementById(screenId).classList.add("active");
+
+    window.scrollTo(0, 0);
+}
+
+
+// UNLOCK BIRTHDAY SURPRISE
+function unlockSurprise() {
+    const enteredCode = document.getElementById("passcode").value;
+    const error = document.getElementById("errorMessage");
+
+    if (enteredCode === SECRET_CODE) {
+        error.textContent = "Yayyy! Your surprise is ready! ♡";
+
+        createConfetti();
+
+        setTimeout(() => {
+            showScreen("cakeScreen");
+        }, 1000);
+
+    } else {
+        error.textContent = "Oops! Try the secret passcode again ♡";
+    }
+}
+
+// PRESS ENTER TO UNLOCK
+document.getElementById("passcode").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        unlockSurprise();
+    }
+});
+
+
+// BLOW CANDLES
+function blowCandles() {
+    const button = document.getElementById("blowButton");
+    const flames = document.querySelectorAll(".flame");
+
+    if (!candlesBlown) {
+        flames.forEach(flame => flame.classList.add("out"));
+
+        button.textContent = "Continue to your letter ♡";
+        candlesBlown = true;
+
+        createConfetti();
+
+    } else {
+        showScreen("letterScreen");
+    }
+}
+
+
+// CONFETTI EFFECT
+function createConfetti() {
+    const symbols = ["🎀", "🎈", "🐼", "🌟","🧸"];
+
+    for (let i = 0; i < 35; i++) {
+        const piece = document.createElement("span");
+
+        piece.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+        piece.style.position = "fixed";
+        piece.style.left = Math.random() * 100 + "vw";
+        piece.style.top = "-20px";
+        piece.style.fontSize = (15 + Math.random() * 20) + "px";
+        piece.style.color = ["#ed9fbd", "#b99bd5", "#e8c77f", "#a9c9db"][Math.floor(Math.random() * 4)];
+        piece.style.zIndex = "1000";
+        piece.style.pointerEvents = "none";
+
+        document.body.appendChild(piece);
+
+        const duration = 2500 + Math.random() * 2000;
+
+        piece.animate([
+            { transform: "translateY(0) rotate(0deg)", opacity: 1 },
+            { transform: `translateY(110vh) rotate(500deg)`, opacity: 0 }
+        ], {
+            duration: duration,
+            easing: "ease-in"
+        });
+
+        setTimeout(() => piece.remove(), duration);
+    }
+}
+
+
+// START MEMORIES
+function startMemories() {
+    currentPhoto = 0;
+    displayPhoto();
+    showScreen("memoryScreen");
+}
+
+
+// DISPLAY PHOTO
+function displayPhoto() {
+    const image = document.getElementById("memoryImage");
+    const counter = document.getElementById("photoCounter");
+
+    image.src = photos[currentPhoto];
+
+    image.onerror = function() {
+        counter.textContent = "Please check the photo filename ♡";
+    };
+
+    counter.textContent = `Memory ${currentPhoto + 1} of ${photos.length} ♡`;
+}
+
+
+// NEXT PHOTO
+function nextPhoto() {
+    currentPhoto = (currentPhoto + 1) % photos.length;
+    displayPhoto();
+}
+
+
+// PREVIOUS PHOTO
+function previousPhoto() {
+    currentPhoto = (currentPhoto - 1 + photos.length) % photos.length;
+    displayPhoto();
+}
+
+
+// AUTOMATIC SLIDESHOW
+function toggleSlideshow() {
+    const button = document.getElementById("pauseButton");
+
+    if (slideshowTimer) {
+        clearInterval(slideshowTimer);
+        slideshowTimer = null;
+        button.textContent = "Play";
+    } else {
+        slideshowTimer = setInterval(nextPhoto, 3000);
+        button.textContent = "Pause";
+    }
+}
+
+
+// FINAL SURPRISE
+function finishSurprise() {
+    if (slideshowTimer) {
+        clearInterval(slideshowTimer);
+        slideshowTimer = null;
+    }
+
+    showScreen("finalScreen");
+    createConfetti();
+}
+
+
+// GENERATE QR CODE
+window.addEventListener("load", function() {
+    const qrElement = document.getElementById("qrcode");
+    qrElement.innerHTML= "";
+    if (typeof QRCode !== "undefined") {
+        new QRCode(qrElement, {
+            text:  "https://sireesha1612.github.io/memory-website/",
+            width: 150,
+            height: 150,
+            colorDark: "#806a83",
+            colorLight: "#fffafa",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    } else {
+        qrElement.textContent = "QR code needs an internet connection to load.";
+    }
+});
+// Generate QR code for your birthday website
+const qrElement = document.getElementById("qrcode");
+
+if (qrElement) {
+    qrElement.innerHTML = "";
+
+    new QRCode(qrElement, {
+        text: window.location.href,
+        width: 150,
+        height: 150
+    });
+}
