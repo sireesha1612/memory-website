@@ -7,7 +7,7 @@ const photos = [
     "images\\photo 13.jpeg",
     "images\\photo 1.jpeg",
     "images\\photo 5.jpeg",
-    "\images\\photo10.jpeg",
+    "images\\photo10.jpeg",
     "images\\photo 6.jpeg",
     "images\\photo4.jpeg",
     "images\\photo 11.jpeg",
