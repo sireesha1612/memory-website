@@ -1,28 +1,23 @@
 const SECRET_CODE = "2611";
 
-// Add your photos here
+// YOUR PHOTOS
 const photos = [
-    "images\\anu.jpeg",
-    "images\\photo 3.jpeg",
-    "images\\photo 13.jpeg",
-    "images\\photo 1.jpeg",
-    "images\\photo 5.jpeg",
-    "images\\photo10.jpeg",
-    "images\\photo 6.jpeg",
-    "images\\photo4.jpeg",
-    "images\\photo 11.jpeg",
-    "images\\photo19.jpeg",
-    "images\\photo2.jpeg"
+    "images/anu.jpeg",
+    "images/photo 3.jpeg",
+    "images/photo 13.jpeg",
+    "images/photo 1.jpeg",
+    "images/photo 5.jpeg",
+    "images/photo10.jpeg",
+    "images/photo 6.jpeg",
+    "images/photo4.jpeg",
+    "images/photo 11.jpeg",
+    "images/photo19.jpeg",
+    "images/photo2.jpeg"
 ];
 
 let currentPhoto = 0;
 let slideshowTimer = null;
 let candlesBlown = false;
-
-
-// CHANGE THIS AFTER HOSTING YOUR WEBSITE.
-// For now, the QR code uses the current website address.
-const birthdayWebsiteURL = "C:\Users\hp\Downloads\anu_qr_photo_website.zip";
 
 
 // SCREEN CHANGER
@@ -32,7 +27,6 @@ function showScreen(screenId) {
     });
 
     document.getElementById(screenId).classList.add("active");
-
     window.scrollTo(0, 0);
 }
 
@@ -55,6 +49,7 @@ function unlockSurprise() {
         error.textContent = "Oops! Try the secret passcode again ♡";
     }
 }
+
 
 // PRESS ENTER TO UNLOCK
 document.getElementById("passcode").addEventListener("keydown", function(event) {
@@ -85,7 +80,7 @@ function blowCandles() {
 
 // CONFETTI EFFECT
 function createConfetti() {
-    const symbols = ["🎀", "🎈", "🐼", "🌟","🧸"];
+    const symbols = ["🎀", "🎈", "🐼", "🌟", "🧸"];
 
     for (let i = 0; i < 35; i++) {
         const piece = document.createElement("span");
@@ -106,7 +101,7 @@ function createConfetti() {
 
         piece.animate([
             { transform: "translateY(0) rotate(0deg)", opacity: 1 },
-            { transform: `translateY(110vh) rotate(500deg)`, opacity: 0 }
+            { transform: "translateY(110vh) rotate(500deg)", opacity: 0 }
         ], {
             duration: duration,
             easing: "ease-in"
@@ -130,11 +125,11 @@ function displayPhoto() {
     const image = document.getElementById("memoryImage");
     const counter = document.getElementById("photoCounter");
 
-    image.src = photos[currentPhoto];
-
     image.onerror = function() {
         counter.textContent = "Please check the photo filename ♡";
     };
+
+    image.src = photos[currentPhoto];
 
     counter.textContent = `Memory ${currentPhoto + 1} of ${photos.length} ♡`;
 }
@@ -184,18 +179,21 @@ function finishSurprise() {
 // GENERATE QR CODE
 window.addEventListener("load", function() {
     const qrElement = document.getElementById("qrcode");
-    qrElement.innerHTML= "";
-    if (typeof QRCode !== "undefined") {
-        new QRCode(qrElement, {
-            text:  "https://sireesha1612.github.io/memory-website/",
-            width: 150,
-            height: 150,
-            colorDark: "#806a83",
-            colorLight: "#fffafa",
-            correctLevel: QRCode.CorrectLevel.H
-        });
-    } else {
-        qrElement.textContent = "QR code needs an internet connection to load.";
+
+    if (qrElement) {
+        qrElement.innerHTML = "";
+
+        if (typeof QRCode !== "undefined") {
+            new QRCode(qrElement, {
+                text: "https://sireesha1612.github.io/memory-website/",
+                width: 150,
+                height: 150,
+                colorDark: "#806a83",
+                colorLight: "#fffafa",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        } else {
+            qrElement.textContent = "QR code needs an internet connection to load.";
+        }
     }
 });
-
