@@ -1,1 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Our Special Memories ♡</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: #fff8f5;
+            color: #806a83;
+            padding: 25px 15px;
+        }
+
+        header {
+            text-align: center;
+            padding: 35px 10px;
+        }
+
+        header h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(32px, 6vw, 50px);
+            color: #c58cb5;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .decoration {
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        .gallery {
+            max-width: 1050px;
+            margin: 25px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .photo-card {
+            background: white;
+            padding: 12px 12px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 18px #b99ab333;
+            transform: rotate(-1deg);
+            transition: 0.3s;
+        }
+
+        .photo-card:nth-child(even) {
+            transform: rotate(1deg);
+        }
+
+        .photo-card:hover {
+            transform: translateY(-7px) rotate(0deg);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 5px;
+            display: block;
+        }
+
+        .photo-card p {
+            font-family: 'Pacifico', cursive;
+            color: #bd91c9;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 17px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 35px 10px;
+            line-height: 2;
+            color: #bd91c9;
+        }
+
+        @media (max-width: 500px) {
+            .gallery {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
+            }
+
+            .photo-card {
+                padding: 7px 7px 15px;
+            }
+
+            .photo-card img {
+                height: 160px;
+            }
+
+            .photo-card p {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="decoration">🎀 🧸 🌷</div>
+
+        <h1>Our Beautiful Memories ♡</h1>
+
+        <p>
+            Little moments, endless happiness.
+            <br>
+            Every picture tells a beautiful story! ❤️
+        </p>
+    </header>
+
+    <div class="gallery">
+
+        <!-- ADD YOUR PHOTOS BELOW -->
+
+        <div class="photo-card">
+            <img src="images/gallery1.jpeg" alt="Memory 1">
+            <p>Sweet Memories ♡</p>
+        </div>
+
+        <div class="photo-card">
+            <img src="images/gallery2.jpeg" alt="Memory 2">
+            <p>Beautiful Moments 🎀</p>
+        </div>
+
+        <div class="photo-card">
+            <img src="images/gallery3.jpeg" alt="Memory 3">
+            <p>Forever Together ❤️</p>
+        </div>
+
+        <div class="photo-card">
+            <img src="images/gallery4.jpeg" alt="Memory 4">
+            <p>Our Happiness 🌷</p>
+        </div>
+
+        <div class="photo-card">
+            <img src="images/gallery5.jpeg" alt="Memory 5">
+            <p>Precious Days 🧸</p>
+        </div>
+
+        <div class="photo-card">
+            <img src="images/gallery6.jpeg" alt="Memory 6">
+            <p>Love These Moments ♡</p>
+        </div>
+
+    </div>
+
+    <footer>
+        Made with lots of love 🎀
+        <br>
+        Our memories are forever! ❤️
+    </footer>
+
+</body>
+</html>
