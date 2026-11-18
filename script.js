@@ -198,15 +198,4 @@ window.addEventListener("load", function() {
         qrElement.textContent = "QR code needs an internet connection to load.";
     }
 });
-// Generate QR code for your birthday website
-const qrElement = document.getElementById("qrcode");
 
-if (qrElement) {
-    qrElement.innerHTML = "";
-
-    new QRCode(qrElement, {
-        text: window.location.href,
-        width: 150,
-        height: 150
-    });
-}
