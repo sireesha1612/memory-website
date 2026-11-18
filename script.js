@@ -1,5 +1,16 @@
 const SECRET_CODE = "2611";
 
+function checkCode() {
+    const enteredCode = document.getElementById("secretInput").value;
+
+    if (enteredCode === SECRET_CODE) {
+        document.getElementById("loginScreen").style.display = "none";
+        document.getElementById("memoryScreen").style.display = "block";
+    } else {
+        alert("Wrong code! Try again ❤️");
+    }
+}
+
 // YOUR PHOTOS
 const photos = [
     "images/anu.jpeg",
