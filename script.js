@@ -185,7 +185,7 @@ window.addEventListener("load", function() {
 
         if (typeof QRCode !== "undefined") {
             new QRCode(qrElement, {
-                text: "https://sireesha1612.github.io/memory-website/",
+                text: "https://sireesha1612.github.io/memory-website/gallery.html",
                 width: 150,
                 height: 150,
                 colorDark: "#806a83",
