@@ -1,15 +1,5 @@
+
 const SECRET_CODE = "2611";
-
-function checkCode() {
-    const enteredCode = document.getElementById("secretInput").value;
-
-    if (enteredCode === SECRET_CODE) {
-        document.getElementById("loginScreen").style.display = "none";
-        document.getElementById("memoryScreen").style.display = "block";
-    } else {
-        alert("Wrong code! Try again ❤️");
-    }
-}
 
 // YOUR PHOTOS
 const photos = [
@@ -42,9 +32,9 @@ function showScreen(screenId) {
 }
 
 
-// UNLOCK BIRTHDAY SURPRISE
+// UNLOCK SURPRISE
 function unlockSurprise() {
-    const enteredCode = document.getElementById("passcode").value;
+    const enteredCode = document.getElementById("passcode").value.trim();
     const error = document.getElementById("errorMessage");
 
     if (enteredCode === SECRET_CODE) {
@@ -63,9 +53,30 @@ function unlockSurprise() {
 
 
 // PRESS ENTER TO UNLOCK
-document.getElementById("passcode").addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-        unlockSurprise();
+document.addEventListener("DOMContentLoaded", function() {
+    const passcode = document.getElementById("passcode");
+
+    if (passcode) {
+        passcode.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                unlockSurprise();
+            }
+        });
+    }
+
+    // GENERATE QR CODE
+    const qrElement = document.getElementById("qrcode");
+
+    if (qrElement && typeof QRCode !== "undefined") {
+        new QRCode(qrElement, {
+            text: "https://sireesha1612.github.io/memory-website/",
+            width: 200,
+            height: 200,
+            colorDark: "#806a83",
+            colorLight: "#fffafa",
+            correctLevel: QRCode.CorrectLevel.H
+        });
     }
 });
 
@@ -82,14 +93,13 @@ function blowCandles() {
         candlesBlown = true;
 
         createConfetti();
-
     } else {
         showScreen("letterScreen");
     }
 }
 
 
-// CONFETTI EFFECT
+// CONFETTI
 function createConfetti() {
     const symbols = ["🎀", "🎈", "🐼", "🌟", "🧸"];
 
@@ -97,12 +107,10 @@ function createConfetti() {
         const piece = document.createElement("span");
 
         piece.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-
         piece.style.position = "fixed";
         piece.style.left = Math.random() * 100 + "vw";
         piece.style.top = "-20px";
         piece.style.fontSize = (15 + Math.random() * 20) + "px";
-        piece.style.color = ["#ed9fbd", "#b99bd5", "#e8c77f", "#a9c9db"][Math.floor(Math.random() * 4)];
         piece.style.zIndex = "1000";
         piece.style.pointerEvents = "none";
 
@@ -137,7 +145,7 @@ function displayPhoto() {
     const counter = document.getElementById("photoCounter");
 
     image.onerror = function() {
-        counter.textContent = "Please check the photo filename ♡";
+        counter.textContent = "Photo not found! Check filename ♡";
     };
 
     image.src = photos[currentPhoto];
@@ -160,7 +168,7 @@ function previousPhoto() {
 }
 
 
-// AUTOMATIC SLIDESHOW
+// SLIDESHOW
 function toggleSlideshow() {
     const button = document.getElementById("pauseButton");
 
@@ -185,26 +193,3 @@ function finishSurprise() {
     showScreen("finalScreen");
     createConfetti();
 }
-
-
-// GENERATE QR CODE
-window.addEventListener("load", function() {
-    const qrElement = document.getElementById("qrcode");
-
-    if (qrElement) {
-        qrElement.innerHTML = "";
-
-        if (typeof QRCode !== "undefined") {
-            new QRCode(qrElement, {
-                text: "https://sireesha1612.github.io/memory-website/gallery.html",
-                width: 200,
-                height: 200,
-                colorDark: "#806a83",
-                colorLight: "#fffafa",
-                correctLevel: QRCode.CorrectLevel.H
-            });
-        } else {
-            qrElement.textContent = "QR code needs an internet connection to load.";
-        }
-    }
-});
